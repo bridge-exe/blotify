@@ -1,8 +1,7 @@
 import spotipy
-import sys
 from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.oauth2 import SpotifyOAuth
-
+from auth import * 
 
 client_id = 'ca352b7949dd41018f9fd85dc2aeb024'
 secret = '17314964a6e14136b05c9bdbd9234ae1'
@@ -41,5 +40,3 @@ def playlister(user, playlists, to_sort):
         
     return song_and_art
         
-
-playlister(user = user_id, playlists = user_playlists, to_sort = playlist_to_sort)
