@@ -37,6 +37,6 @@ def playlister(user, playlists, to_sort):
         song_art  = playlist_items['items'][song]['track']['album']['images'][0]['url']
         song_and_art[song_uri] = song_art
         
-        
     return song_and_art
+        
         

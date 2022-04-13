@@ -4,16 +4,17 @@ import shutil # to save it locally
 import os
 
 song_and_art = playlister(user_id, user_playlists, playlist_to_sort) 
+images = 'playlist-images'
+os.makedirs(images, exist_ok = True)
 
-def snapper(file_path = 'download-images-python'):
-    file_path = 'download-images-python'
+def snapper(file_path = images):
     for f in os.listdir(file_path):
         os.remove(os.path.join(file_path, f))
         
 def downloader(saa_dict): 
     snapper()
     for name, url in saa_dict.items(): 
-        file_name = 'download-images-python/' + name.split(":")[-1] + '.jpg'
+        file_name = images + '/' + name.split(":")[-1] + '.jpg'
         res = requests.get(url, stream = True)
 
         if res.status_code == 200:
@@ -24,4 +25,4 @@ def downloader(saa_dict):
             print('Image Couldn\'t be retrieved')
     return 
      
-downloader(song_and_art)
+# downloader(song_and_art)

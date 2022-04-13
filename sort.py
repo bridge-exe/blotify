@@ -1,38 +1,31 @@
+import io
+from urllib.request import urlopen
 from sklearn.cluster import KMeans
 from collections import Counter
-import cv2 #for resizing image
+from main import * 
+from urllib.request import urlopen
+from colorthief import ColorThief
 
-def get_dominant_color(image, k=4, image_processing_size = None):
-    """
-    takes an image as input
-    returns the dominant color of the image as a list
-    
-    dominant color is found by running k means on the 
-    pixels & returning the centroid of the largest cluster
+song_and_art = playlister(user_id, user_playlists, playlist_to_sort) 
+        
+color_dict = {}
+        
+def sort(saa_dict, palatte = False): 
+    for name, url in saa_dict.items(): 
+        file_name = name.split(":")[-1]
 
-    processing time is sped up by working with a smaller image; 
-    this resizing can be done with the image_processing_size param 
-    which takes a tuple of image dims as input
+        art = urlopen(url)
+        art_color_prof = io.BytesIO(art.read())
+        color_thief = ColorThief(art_color_prof)
+        
+        art_color = color_thief.get_color(quality=1)
+        color_dict[art_color] = file_name 
+        
+        if palatte: 
+            color_thief.get_palatte(quality=1)
 
-    >>> get_dominant_color(my_image, k=4, image_processing_size = (25, 25))
-    [56.2423442, 34.0834233, 70.1234123]
-    """
-    #resize image if new dims provided
-    if image_processing_size is not None:
-        image = cv2.resize(image, image_processing_size, 
-                            interpolation = cv2.INTER_AREA)
-    
-    #reshape the image to be a list of pixels
-    image = image.reshape((image.shape[0] * image.shape[1], 3))
+    print(color_dict)
+    return color_dict
 
-    #cluster and assign labels to the pixels 
-    clt = KMeans(n_clusters = k)
-    labels = clt.fit_predict(image)
+sort(song_and_art)
 
-    #count labels to find most popular
-    label_counts = Counter(labels)
-
-    #subset out most popular centroid
-    dominant_color = clt.cluster_centers_[label_counts.most_common(1)[0][0]]
-
-    return list(dominant_color)
