@@ -1,31 +1,34 @@
-import io
-from urllib.request import urlopen
-from sklearn.cluster import KMeans
-from collections import Counter
-from main import * 
-from urllib.request import urlopen
-from colorthief import ColorThief
 
-song_and_art = playlister(user_id, user_playlists, playlist_to_sort) 
-        
-color_dict = {}
-        
-def sort(saa_dict, palatte = False): 
-    for name, url in saa_dict.items(): 
-        file_name = name.split(":")[-1]
+import collections
+import json
+import nntplib
+from dom_color import * 
+from scipy.spatial import distance
+import numpy as np
 
-        art = urlopen(url)
-        art_color_prof = io.BytesIO(art.read())
-        color_thief = ColorThief(art_color_prof)
+with open('color_dict.txt', 'r') as file:
+    color_dict = json.load(file)
+    
+def sorter(color_dict): 
+    tracklist = []
+    
+    tupled_sort = {}
+    for key, val in color_dict.items():
+        key = eval(key)
+        tupled_sort[key] = val
         
-        art_color = color_thief.get_color(quality=1)
-        color_dict[art_color] = file_name 
-        
-        if palatte: 
-            color_thief.get_palatte(quality=1)
+    d = collections.OrderedDict(sorted(tupled_sort.items()))
+    for key, v in d.items():
+        tracklist.append(v)
+     
+    # with open('tracklist.txt', 'w') as output_file:
+    #     for track in tracklist:
+    #         output_file.write(track + '\n')
+    
+    
+    # print(tracklist)
+    print('Sort done!')
+    return tracklist
 
-    print(color_dict)
-    return color_dict
-
-sort(song_and_art)
+# sort(color_dict)
 
