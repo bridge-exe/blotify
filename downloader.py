@@ -3,7 +3,7 @@ import requests # to get image from the web
 import shutil # to save it locally
 import os
 
-song_and_art = playlister(user_id, user_playlists, playlist_to_sort) 
+# song_and_art = playlister(user_id, user_playlists, playlist_to_sort) 
 images = 'playlist-images'
 os.makedirs(images, exist_ok = True)
 
