@@ -1,6 +1,5 @@
 from matplotlib.colors import rgb_to_hsv
 
-
 def dom_col(saa_dict, palatte = False): 
     import io
     from urllib.request import urlopen
@@ -14,7 +13,7 @@ def dom_col(saa_dict, palatte = False):
         art = urlopen(url)
         art_color_prof = io.BytesIO(art.read())
         color_thief = ColorThief(art_color_prof)
-        rbg_color = color_thief.get_color(quality=1)
+        rbg_color = color_thief.get_color(quality=10)
         hsv_color = tuple(rgb_to_hsv(rbg_color))
         
         art_color = str(hsv_color)

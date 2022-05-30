@@ -4,27 +4,30 @@ from spotipy.oauth2 import SpotifyOAuth
 from auth import *
 from dom_color import *
 from sort import sorter
-import os
 
-#
-print('Please input your client_id, secret, and your personal user_id.\n') 
-client_id = str(input("Your client ID: "))
-secret = str(input("Your client secret: "))
-user_is = str(input("Your user ID"))
-playlist_to_sort = str(input("Exact name of playlist to sort:"))
-# playlist_to_sort = ''
+#Please input your client_id, secret, and your personal user_id. 
+
+# print('Please input your client_id, secret, and your personal user_id. ')
+# client_id = str(input("Your client ID: "))
+# secret = str(input("Your client secret: "))
+# user_id = str(input("Your user ID: "))
+client_id = 'ca352b7949dd41018f9fd85dc2aeb024'
+secret = '17314964a6e14136b05c9bdbd9234ae1'
+user_id = 's3haqvhbykrrknwz1c0wwukwn'
+playlist_to_sort = 'Salty'
 
 
 auth = SpotifyClientCredentials(client_id, secret)
 sp = spotipy.Spotify(auth_manager=auth)
 
-
+# playlist_to_sort = str(input("Exact name of PUBLIC playlist to sort: "))
 
 playlists = sp.user_playlists('spotify')
 user_playlists = sp.user_playlists(user_id) 
 
 def playlister(user, playlists, to_sort):
     pl_uri_list = {}
+    
     while playlists: #gets uri for each playlist 
         for i, playlist in enumerate(playlists['items']):
             # print("%4d %s %s" % (i + 1 + playlists['offset'], playlist['uri'],  playlist['name']))  
@@ -33,7 +36,8 @@ def playlister(user, playlists, to_sort):
             playlists = sp.next(playlists)
         else:
             playlists = None
-
+    for item in pl_uri_list.items(): 
+        print(item)
     song_and_art = {} 
     playlist = pl_uri_list[to_sort]
     playlist_items = sp.playlist_items(playlist, market = 'US')

@@ -20,12 +20,7 @@ def sorter(color_dict):
     d = collections.OrderedDict(sorted(tupled_sort.items()))
     for key, v in d.items():
         tracklist.append(v)
-     
-    # with open('tracklist.txt', 'w') as output_file:
-    #     for track in tracklist:
-    #         output_file.write(track + '\n')
-    
-    
+        
     # print(tracklist)
     print('Sort done!')
     return tracklist
