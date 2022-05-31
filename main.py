@@ -10,12 +10,6 @@ from sort import sorter
 # client_id = str(input("Your client ID: "))
 # secret = str(input("Your client secret: "))
 # user_id = str(input("Your user ID: "))
-client_id = 'ca352b7949dd41018f9fd85dc2aeb024' 
-SPOTIPY_CLIENT_ID = 'ca352b7949dd41018f9fd85dc2aeb024'
-secret = '17314964a6e14136b05c9bdbd9234ae1'
-user_id = 's3haqvhbykrrknwz1c0wwukwn'
-playlist_to_sort = 'Savory'
-
 
 auth = SpotifyClientCredentials(client_id, secret)
 sp = spotipy.Spotify(auth_manager=auth)
@@ -25,15 +19,12 @@ sp = spotipy.Spotify(auth_manager=auth)
 playlists = sp.user_playlists('spotify', limit = 50)
 user_playlists = sp.user_playlists(user_id) 
 
-
 def get_playlist_tracks(u, playlist_id):
     results = sp.playlist_items(playlist_id=playlist_id, market = 'us')
     tracks = results['items']
     while results['next']:
         results = sp.next(results)
-        tracks.extend(results['items'])
-    
-    
+        tracks.extend(results['items'])    
     return tracks
 
 def playlister(user, playlists, playlist_to_sort):
@@ -59,16 +50,13 @@ def playlister(user, playlists, playlist_to_sort):
         
     print('Playlister done!')
     return song_and_art
-    
-# spotify_client = SpotifyClient(os.getenv("SPOTIFY_AUTHORIZATION_TOKEN"),
-#                                    os.getenv("SPOTIFY_USER_ID"))
+
 p = playlister(user_id, user_playlists, playlist_to_sort)
 d = dom_col(p)
-print(len(d))
 tracklist = sorter(d)
 
-if len(tracklist) > 1: 
-    sorted_playlist = playlist_to_sort + '-Sorted invLum'
+if len(tracklist) > 2: 
+    sorted_playlist = playlist_to_sort + '-Sorted ILum'
     new_list = sp.user_playlist_create(user_id, sorted_playlist)
 
     playlist_id = new_list["id"]
@@ -82,9 +70,10 @@ if len(tracklist) > 1:
         bound = range(round(int(len(tracklist))/10) + 1)
         for i in bound:
             tracks_100 = tracklist[lower:upper]
-            print(tracks_100)
-            sp.playlist_add_items(playlist_id, tracks_100)
+            # print(tracks_100)
+            if (tracks_100 != []): 
+                sp.playlist_add_items(playlist_id, tracks_100)
             lower+=10
             upper+=10
     
-        
+    print('Playlist done! Check your Spotify!')
