@@ -40,7 +40,7 @@ def playlister(user, playlists, playlist_to_sort):
     song_and_art = {} 
     playlist = pl_uri_list[playlist_to_sort]
     playlist_items = get_playlist_tracks(user_id, playlist_id = playlist)
-
+    
     for song in range(len(playlist_items)):       
         song_uri   = playlist_items[song]['track']['uri']
         # # song_name = playlist_items[song]['track']['name']
@@ -55,8 +55,8 @@ p = playlister(user_id, user_playlists, playlist_to_sort)
 d = dom_col(p)
 tracklist = sorter(d)
 
-if len(tracklist) > 2: 
-    sorted_playlist = playlist_to_sort + '-Sorted ILum'
+if len(tracklist) > 1000: 
+    sorted_playlist = playlist_to_sort + '-HhlumSVLum sort80'
     new_list = sp.user_playlist_create(user_id, sorted_playlist)
 
     playlist_id = new_list["id"]
