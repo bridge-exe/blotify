@@ -1,7 +1,9 @@
 # blotify
 Welome to Blotify! 
 
-This is a simple color-sorter for your spotify playlists. By the dominant color of the album art of your playlists, you can sort through the playlist by HSV values. Color sorting is hard, and so it's not perfect! But it works pretty well :) 
+This is a simple color-sorter for your spotify playlists. By the dominant color of the album art of your playlists, you can sort through the playlist by HSV values. Then, when you scroll quickly through the playlist, it looks like a color wheel! Simple quality of life stuff. 
+
+Color sorting is hard, and so it's not perfect! But it works pretty well :) 
 
 v3: 
 added palette maker, of variable size depending on how many songs are in the playlist 
