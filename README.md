@@ -11,10 +11,10 @@ added palette maker, of variable size depending on how many songs are in the pla
 v2: 
 fixed song leakage, now the amount of songs in the sorted playlist matches the amount of songs in the original playlist 
 
-Original
-![image](https://user-images.githubusercontent.com/62908125/171738292-a590a60a-0b84-4437-8772-0c3f9dd3f177.png)
+Unsorted: 
+![image](https://user-images.githubusercontent.com/62908125/171739170-889583d5-2f57-4a3a-b378-3f7db862312c.png)
 
-Sorted 
+Sorted: 
 ![image](https://user-images.githubusercontent.com/62908125/171738443-5bd04ccd-b162-4495-b443-2861b3d3cd06.png)
 
 
